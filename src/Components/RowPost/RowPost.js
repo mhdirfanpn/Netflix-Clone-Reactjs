@@ -4,14 +4,13 @@ import "./RowPost.css";
 import { imageUrl, API_KEY } from "../../constants/constants";
 import axios from "../../axios";
 function RowPost(props) {
+  console.log(props.url);
   const [movies, setMovies] = useState([])
   const [urlId, setuidId] = useState('')
   useEffect(() => {
     axios.get(props.url).then((response)=>{
       console.log(response.data);
       setMovies(response.data.results)
-    }).catch(err=>{
-      // alert('Network error')
     })
   }, [])
 
@@ -19,7 +18,6 @@ function RowPost(props) {
     height: '500',
     width: '100%',
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
   };
@@ -48,10 +46,9 @@ function RowPost(props) {
         />
           )
         }
-      
-      </div>
-     { urlId && <YouTube opts={opts} videoId={urlId.key}/> }
 
+      </div>
+      { urlId && <YouTube opts={opts} videoId={urlId.key}/> }
      
     </div>
   );
